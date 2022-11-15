@@ -45,5 +45,9 @@ public class T2Demo {
 
         Person exp1 = new Person();
         System.out.println(exp1);
+        System.out.println("                                 ");
+
+        Person exp2 = new Person();
+        System.out.println(exp2);
     }
 }
