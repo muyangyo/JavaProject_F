@@ -9,15 +9,12 @@ import java.util.Scanner;
  * Time: 21:34
  */
 public class IntArrStruct {
-    //使用了的大小
-    int usedsize = 0;
-    //真实空间大小
-    int size = 5;
-    //初始化
-    int[] arr = {0, 0, 0, 0, 0};
+    int usedsize = 0;//使用了的大小
+    int size = 5;//真实空间大小
+    int[] arr = {0, 0, 0, 0, 0};//初始化
 
-    //intarr数组打印(仅使用的)
-    public void myintarr_used_toString() {
+    public void myintarr_used_toString()//intarr数组打印(仅使用的)
+    {
         System.out.printf("数组元素:");
         for (int i = 0; i < usedsize; i++) {
             if (arr[i] != 0) {
@@ -27,7 +24,8 @@ public class IntArrStruct {
         System.out.println();
     }
 
-    public static void pos_add(IntArrStruct exp1, int x) {
+    public static void pos_add(IntArrStruct exp1, int x) //在pos位置添加元素
+    {
 
         System.out.println();
         System.out.printf("请输入位置:");
@@ -51,7 +49,8 @@ public class IntArrStruct {
         exp1.usedsize++;
     }
 
-    public static void tail_add(IntArrStruct exp1, int x) {
+    public static void tail_add(IntArrStruct exp1, int x) //尾加
+    {
         if (exp1.usedsize == exp1.size) {
             exp1.isfull_toex(exp1);
         }
@@ -59,13 +58,14 @@ public class IntArrStruct {
         exp1.usedsize++;
     }
 
-    private void isfull_toex(IntArrStruct exp1) {
+    private void isfull_toex(IntArrStruct exp1)//判断是否为满,满了自动扩容
+    {
         size = size + 5;
         exp1.arr = Arrays.copyOf(exp1.arr, size);
     }
 
-    // 判定是否包含某个元素
-    public static void contains(IntArrStruct e1, int k) {
+    public static void contains(IntArrStruct e1, int k)  // 判定是否包含某个元素
+    {
         for (int i = 0; i < e1.usedsize; i++) {
             if (e1.arr[i] == k) {
                 System.out.println("找到了,下标为:" + i);
@@ -74,8 +74,8 @@ public class IntArrStruct {
         }
     }
 
-    //数组全长下标打印(无论使用与否)
-    private void intsub_toString() {
+    private void intsub_toString() //数组全长下标打印(无论使用与否)
+    {
         System.out.println("==============================================");
         System.out.println("以下为数组和下标打印函数输出:");
         System.out.println("arr=" + Arrays.toString(arr));
@@ -89,7 +89,8 @@ public class IntArrStruct {
         }
     }
 
-    public static void getPos(IntArrStruct e1) {
+    public static void getPos(IntArrStruct e1) //得到pos位置的下标
+    {
         int pos;
         System.out.println("请输入一个位置:");
         Scanner sc = new Scanner(System.in);
@@ -102,8 +103,8 @@ public class IntArrStruct {
         }
     }
 
-    // 给 pos 位置的元素设为 value
-    public static void setPos(IntArrStruct e1) {
+    public static void setPos(IntArrStruct e1)  //给 pos 位置的元素设为 value
+    {
         int pos;
         int val;
         Scanner exp1 = new Scanner(System.in);
@@ -121,7 +122,8 @@ public class IntArrStruct {
         }
     }
 
-    public static void remove(IntArrStruct e1) {
+    public static void remove(IntArrStruct e1)  //删除第一个对应的元素
+    {
         int val;
         System.out.println("请输入一个需要删除的值:");
         Scanner sc = new Scanner(System.in);
@@ -141,17 +143,18 @@ public class IntArrStruct {
         System.out.println("没有该值");
     }
 
-    // 获取顺序表长度
-    public int size() {
+    public int size()     // 获取顺序表长度
+    {
         return usedsize;
     }
 
-    // 清空顺序表
-    public void clear() {
-        usedsize=0;
+    public void clear()     // 清空顺序表
+    {
+        usedsize = 0;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  //内部测试接口
+    {
         IntArrStruct e1 = new IntArrStruct();
         tail_add(e1, 1);
         tail_add(e1, 2);
