@@ -109,9 +109,28 @@ public class Single_LinkList {
 
     public void clear() //清空链表
     {
-
+        phead=null;
     }
 
+    public void reverseList()
+    {
+        if(phead==null)
+        {
+            System.out.println("错误:空链表");
+            return;
+        }
+        Single_Node prev =null;
+        Single_Node cur =phead;
+        while(cur!=null)
+        {
+
+            Single_Node next =cur.next;
+            cur.next =prev; //由于prev初始化为NULL,正好解决了头结点逆置后需要将this.next置空
+            prev =cur;
+            cur =next;
+        }
+        phead=prev;
+    }
     //内部测试接口
     public static void main(String[] args) {
         Single_LinkList ls1 = new Single_LinkList();
@@ -119,6 +138,8 @@ public class Single_LinkList {
         ls1.addIndex(0,2);
         ls1.addLast(3);
         System.out.println(ls1.size());
+        ls1.display();
+        ls1.reverseList();
         ls1.display();
     }
 }
