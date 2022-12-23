@@ -1,3 +1,6 @@
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Scanner;
 
 /**
@@ -390,7 +393,7 @@ public class Single_LinkList {
         return true;
     }
 
-    public static Single_Node getIntersectionNode(Single_LinkList A, Single_LinkList B)
+    public static Single_Node getIntersectionNode(@NotNull Single_LinkList A, @NotNull Single_LinkList B)
     //给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null
     {
         Single_Node posA = A.phead;
@@ -414,31 +417,72 @@ public class Single_LinkList {
             }
         }
         while (posA != null && posB != null) {
-            if(posA == posB)  //本身就可能是相同的元素或者输入的是同一个链表
+            if (posA == posB)  //本身就可能是相同的元素或者输入的是同一个链表
             {
                 return posA;
-            }
-            else if (posA.next != null && posA.next == posB.next) {
+            } else if (posA.next != null && posA.next == posB.next) {
                 return posA.next;
             }
-            posA =posA.next;
-            posB =posB.next;
+            posA = posA.next;
+            posB = posB.next;
         }
         return null;
+    }
+
+    public boolean hasCycle()
+    //判断一个链表是否形成环
+    {
+        Single_Node slow = phead;
+        Single_Node fast = phead;
+        if (phead == null) {
+            return false;
+        }
+        while (fast != null && fast.next != null && slow.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Single_Node detectCycle()
+    //给定一个链表的头节点 phead ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null
+    {
+        Single_Node slow = phead;
+        Single_Node fast = phead;
+        if (phead == null) {
+            return null;
+        }
+        int flag = 0;
+        while (fast != null && fast.next != null && slow.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                flag = 1;
+                break;
+            }
+        }
+        if(flag ==0){
+            return null;
+        }else{
+            slow =phead;
+            while(fast!=slow){
+                fast =fast.next;
+                slow =slow.next;
+            }
+            return fast;
+        }
+
     }
 
     //内部测试接口
     public static void main(String[] args) {
         Single_LinkList ls1 = new Single_LinkList();
         ls1.addLast(1);
-        ls1.addLast(2);
-        ls1.addLast(3);
-        ls1.addLast(4);
-        ls1.addLast(5);
-        ls1.addLast(6);
-        ls1.display();
         //测试函数区
-        System.out.println(ls1.size());
+
 
         //打印函数
         ls1.display();
