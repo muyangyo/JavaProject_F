@@ -384,10 +384,47 @@ public class Single_LinkList {
             if (pos1.data != pos2.data) {
                 return false;
             }
-            pos1=pos1.next;
-            pos2=pos2.next;
+            pos1 = pos1.next;
+            pos2 = pos2.next;
         }
         return true;
+    }
+
+    public static Single_Node getIntersectionNode(Single_LinkList A, Single_LinkList B)
+    //给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null
+    {
+        Single_Node posA = A.phead;
+        Single_Node posB = B.phead;
+        if (posA == null || posB == null) {
+            return null;
+        }
+        int Alongth = A.size();
+        int Blongth = B.size();
+        int k = Alongth - Blongth;//测算长度
+        if (k > 0) {
+            while (k != 0) {
+                posA = posA.next;
+                k--;
+            }
+        } else if (k < 0) {
+            k = -k;
+            while (k != 0) {
+                posB = posB.next;
+                k--;
+            }
+        }
+        while (posA != null && posB != null) {
+            if(posA == posB)  //本身就可能是相同的元素或者输入的是同一个链表
+            {
+                return posA;
+            }
+            else if (posA.next != null && posA.next == posB.next) {
+                return posA.next;
+            }
+            posA =posA.next;
+            posB =posB.next;
+        }
+        return null;
     }
 
     //内部测试接口
@@ -395,13 +432,13 @@ public class Single_LinkList {
         Single_LinkList ls1 = new Single_LinkList();
         ls1.addLast(1);
         ls1.addLast(2);
-        ls1.addLast(2);
-        ls1.addLast(2);
-        ls1.addLast(2);
-        ls1.addLast(1);
+        ls1.addLast(3);
+        ls1.addLast(4);
+        ls1.addLast(5);
+        ls1.addLast(6);
         ls1.display();
         //测试函数区
-        System.out.println(ls1.chkPalindrome());
+        System.out.println(ls1.size());
 
         //打印函数
         ls1.display();
